@@ -7,7 +7,7 @@ const { rebuildDB } = require('../db/seed_data');
 const { client } = require('../db');
 
 const apiSetup = async () => {
-  const reportsToCreate = [
+  const reportsToCreate = [ 
     { title: "floating patronus", location: 'hogwarts', description: 'it seemed to have somewhat of a glow to it', password: 'ExpectoPatronum' }
   ]
   const reportsCreatedDirectly = await Promise.all(reportsToCreate.map(async ({title, location, description, password}) => {
@@ -32,7 +32,7 @@ describe('API', () => {
   afterAll(async() => {
     await client.end();
   })
-  describe('server', () => {
+  describe.only('server', () => {
     beforeAll(async() => {
     })
     it('Responds to requests', async () => {
