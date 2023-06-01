@@ -1,35 +1,14 @@
 // Build an apiRouter using express Router
-
-
 const express = require('express');
-const server = express();
-const morgan = require('morgan')
+const apiRouter = express.Router();
 
 
-//const {client} = require('db/index.js') 
-//client.connect()
 
-const apiRouter = require('api')
 
-server.use(morgan('dev'));
-server.use(express.json());
 
-server.get('/', (req, res) => {
-    res.send('Hello World!')
-})
 
-server.use((req, res, next) => {
-    console.log("<____Body Logger START____>");
-    console.log(req.body);
-    console.log("<_____Body Logger END_____>");
-    next();
-})
-
-server.listen(3000, () => {
-    console.log('the server is up on port ',  3000);
-})
 // Import the database adapter functions from the db
-const {rebuildDB, testDB} = require('db/seed_data.js');
+const {rebuildDB, testDB} = require('../db/seed_data.js');
 
 
 /**
@@ -79,3 +58,4 @@ const {rebuildDB, testDB} = require('db/seed_data.js');
 
 
 // Export the apiRouter
+module.exports = apiRouter
