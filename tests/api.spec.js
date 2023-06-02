@@ -33,7 +33,7 @@ describe('API', () => {
   afterAll(async() => {
     await client.end();
   })
-  describe.only('server', () => {
+  describe('server', () => {
     beforeAll(async() => {
     })
     it('Responds to requests', async () => {

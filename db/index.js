@@ -132,8 +132,7 @@ async function _getReport(reportId) {
      FROM reports
      WHERE id=$1;
      
-      `, [reportId])
-
+      `, [reportId]);
      
 
 
@@ -157,11 +156,7 @@ async function _getReport(reportId) {
 async function closeReport(reportId, password) {
   try {
     // First, actually grab the report with that id
-    const {rows: [report]} = await client.query(`
-      SELECT *
-      FROM reports
-      WHERE id=$1;
-    `, [reportId])
+    const report = await _getReport(reportId);
 
     // If it doesn't exist, throw an error with a useful message
     if (!report){
@@ -183,12 +178,11 @@ async function closeReport(reportId, password) {
 
     // Finally, update the report if there are no failures, as above
     
-    report.isOpen = false;
+    
     await client.query(`
       UPDATE reports
       SET "isOpen"=false
-      WHERE id=$1
-      RETURNING *;
+      WHERE id=$1;
     `,[reportId])
     
     
